@@ -1,14 +1,13 @@
-# Use OpenJDK 17 as the base image
-FROM openjdk:17-jdk-alpine
-
-# Set the working directory inside the container
+FROM maven:3.8.3-openjdk-17 AS build
 WORKDIR /app
+COPY . /app/
+RUN mvn clean package
 
-# Copy the built JAR file into the container at /app
-COPY target/movies-0.0.1-SNAPSHOT.jar /app/movies-0.0.1-SNAPSHOT.jar
-
-# Expose the port that your Spring Boot application uses
+#
+# Package stage
+#
+FROM openjdk:17-alpine
+WORKDIR /app
+COPY --from=build /app/target/*.jar /app/app.jar
 EXPOSE 8080
-
-# Command to run the application when the container starts
-CMD ["java", "-jar", "movies-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
