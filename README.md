@@ -11,3 +11,6 @@ Use Spring intializer to make a Spring boot application that has the dependencie
 - Spring Data MongoDB
 - Devtools
 - Spring dot-env (https://mvnrepository.com/artifact/me.paulschwarz/spring-dotenv/4.0.0)
+
+The frontend code is here [https://github.com/ZaRamen/Movie-App-Frontend]
+The website might not load due to being a free mongodb atlas database. 
